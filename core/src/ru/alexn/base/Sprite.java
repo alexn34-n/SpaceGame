@@ -24,7 +24,7 @@ public class Sprite extends Rect {
         setWidth(height * aspect);
     }
 
-    public void update (float delta){
+    public void update(float delta) {
 
     }
 
