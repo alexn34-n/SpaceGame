@@ -8,7 +8,9 @@ import ru.alexn.math.Rect;
 import ru.alexn.pool.BulletPool;
 import ru.alexn.sprite.Bullet;
 
-public class Ship extends Sprite {
+public abstract class Ship extends Sprite {
+
+    private static final float DAMAGE_ANIMATE_INTERVAL = 0.1f;
 
     protected final Vector2 v0;
     protected final Vector2 v;
@@ -25,6 +27,8 @@ public class Ship extends Sprite {
 
     protected float reloadInterval;
     protected float reloadTimer;
+
+    private float damageAnimateTimer = DAMAGE_ANIMATE_INTERVAL;
 
     public Ship() {
         v0 = new Vector2();
@@ -50,6 +54,26 @@ public class Ship extends Sprite {
             reloadTimer = 0f;
             shoot();
         }
+        damageAnimateTimer += delta;
+        if (damageAnimateTimer >= DAMAGE_ANIMATE_INTERVAL) {
+            frame = 0;
+        }
+
+    }
+    public void damage(int damage) {
+        hp -= damage;
+        if (hp <= 0) {
+            hp=0;
+            destroy();
+        }
+        frame = 1;
+        damageAnimateTimer = 0f;
+        }
+
+    public abstract boolean isBulletCollision(Bullet bullet);
+
+    public int getBulletDamage() {
+        return bulletDamage;
     }
 
     private void shoot() {
