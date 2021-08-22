@@ -9,31 +9,29 @@ import ru.alexn.math.Rect;
 
 public class Logo extends Sprite {
 
-    private  static  final  float V_LEN=0.001f;
+    private static final float V_LEN = 0.001f;
 
     private Vector2 touch;
     private Vector2 v;
 
-
-
     public Logo(Texture texture) {
-        super (new TextureRegion(texture));
-        this.touch=new Vector2();
-        this.v=new Vector2();
-    }
-
-    @Override
-    public void update(float delta) {
-        if(touch.dst(pos)>V_LEN) {
-            pos.add(v);
-        }else{
-            pos.set(touch);
-        }
+        super(new TextureRegion(texture));
+        this.touch = new Vector2();
+        this.v = new Vector2();
     }
 
     @Override
     public void resize(Rect worldBounds) {
         setHeightProportion(0.3f);
+    }
+
+    @Override
+    public void update(float delta) {
+        if (touch.dst(pos) > V_LEN) {
+            pos.add(v);
+        } else {
+            pos.set(touch);
+        }
     }
 
     @Override
