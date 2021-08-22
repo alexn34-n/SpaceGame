@@ -23,7 +23,7 @@ public class SpaceGame extends ApplicationAdapter {
 	@Override
 	public void render () {
 		x++;
-		ScreenUtils.clear(0.4f, 0.24f, 0.51f, 1);
+		ScreenUtils.clear(0.0f, 1.0f, 0.0f, 1);
 		batch.begin();
 		batch.draw(img, x, 0);
 		batch.setColor(0.56f,0.32f,0.67f,0.5f);
