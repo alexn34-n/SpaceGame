@@ -7,6 +7,7 @@ import com.badlogic.gdx.math.Vector2;
 import ru.alexn.base.BaseScreen;
 import ru.alexn.math.Rect;
 import ru.alexn.sprite.Background;
+import ru.alexn.sprite.MainShip;
 import ru.alexn.sprite.Star;
 
 public class GameScreen extends BaseScreen {
@@ -19,6 +20,7 @@ public class GameScreen extends BaseScreen {
     private TextureAtlas atlas;
 
     private Star[] stars;
+    private MainShip mainShip;
 
     @Override
     public void show() {
@@ -31,6 +33,7 @@ public class GameScreen extends BaseScreen {
         for (int i = 0; i < stars.length; i++) {
             stars[i] = new Star(atlas);
         }
+        mainShip = new MainShip(atlas);
     }
 
     @Override
@@ -47,6 +50,7 @@ public class GameScreen extends BaseScreen {
         for (Star star : stars) {
             star.resize(worldBounds);
         }
+        mainShip.resize(worldBounds);
     }
 
     @Override
@@ -58,11 +62,25 @@ public class GameScreen extends BaseScreen {
 
     @Override
     public boolean touchDown(Vector2 touch, int pointer, int button) {
+        mainShip.touchDown(touch, pointer, button);
         return false;
     }
 
     @Override
     public boolean touchUp(Vector2 touch, int pointer, int button) {
+        mainShip.touchUp(touch, pointer, button);
+        return false;
+    }
+
+    @Override
+    public boolean keyDown(int keycode) {
+        mainShip.keyDown(keycode);
+        return false;
+    }
+
+    @Override
+    public boolean keyUp(int keycode) {
+        mainShip.keyUp(keycode);
         return false;
     }
 
@@ -70,6 +88,8 @@ public class GameScreen extends BaseScreen {
         for (Star star : stars) {
             star.update(delta);
         }
+
+        mainShip.update(delta);
     }
 
     private void draw() {
@@ -78,6 +98,7 @@ public class GameScreen extends BaseScreen {
         for (Star star : stars) {
             star.draw(batch);
         }
+        mainShip.draw(batch);
         batch.end();
     }
 }
