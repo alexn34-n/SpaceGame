@@ -12,6 +12,8 @@ import ru.alexn.pool.ExplosionPool;
 
 public class MainShip extends Ship {
 
+    private static final int HP=1;
+
     private static final float HEIGHT = 0.15f;
     private static final float BOTTOM_MARGIN = 0.05f;
     private static final int INVALID_POINTER = -1;
@@ -34,7 +36,19 @@ public class MainShip extends Ship {
         bulletDamage = 1;
         reloadInterval = RELOAD_INTERVAL;
         v0.set(0.5f, 0);
-        hp = 1;
+        hp = HP;
+    }
+
+    public  void  startNewGame(){
+        hp=HP;
+        pressedLeft=false;
+        pressedRight=false;
+        leftPointer=INVALID_POINTER;
+        rightPointer=INVALID_POINTER;
+        stop();
+        this.pos.x=worldBounds.pos.x;
+        flushDestroy();
+
     }
 
     @Override
