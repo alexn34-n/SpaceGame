@@ -81,6 +81,11 @@ public abstract class Ship extends Sprite {
         boom();
     }
 
+    public int getHp() {
+        return hp;
+    }
+
+
     public int getBulletDamage() {
         return bulletDamage;
     }
